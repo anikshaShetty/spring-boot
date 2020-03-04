@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Info Display Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css" />
+</head>
+<body>
+ <h3>-- ADD EMPLOYEES --</h3>
+    <div class="container">
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Employee Name</span>
+            </div>
+            <input id="name" type="text" class="form-control" placeholder="Name" aria-label="Username"
+                aria-describedby="basic-addon1">
+        </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Employee Salary</span>
+            </div>
+            <input id="salary" type="number" class="form-control" placeholder="Salary" aria-label="Username"
+                aria-describedby="basic-addon1">
+        </div>
+        
+        <div class="input-group mb-3">
+          
+            <button id="employeeadd" class="btn btn-primary">Add Employee</button>
+        </div>
+       
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+    <script>
+	$("#employeeadd").click(()=>{
+		console.log($('#name').val())
+		var employee = {name:$('#name').val(), salary:$('#salary').val() }
+		console.log(employee);
+		
+		/* $.post("api/courses",
+				  course,
+				  function(data, status){
+				    alert("Data: " + data + "\nStatus: " + status);
+				  }); */
+		$.ajax({
+  		  url: 'api/employees',
+  		  method: 'POST',
+	  		dataType: 'json',
+	        contentType: 'application/json',
+  		  data: JSON.stringify(employee)
+  		}).done(function() {
+  		 console.log('Employee added!!')
+  		 alert('Employee added!!');
+  		}); 
+	})
+       
+    </script>
+
+
+</body>
+</html>
